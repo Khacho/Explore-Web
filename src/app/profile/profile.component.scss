@@ -1,0 +1,34 @@
+.modal-body {
+    .body-container {
+        div {
+            margin: auto;
+            margin-bottom: 5px;
+        }
+        .d-inline-block {
+            width: 100%;
+            button {
+                width: 100%;
+            }
+        }
+        button {
+            width: 100%;
+        }
+         ::placeholder {
+            color: #66615b;
+        }
+        .file-input {
+            display: none;
+        }
+        .select-city {
+            cursor: pointer;
+        }
+        .select-city:hover {
+            background-color: lightgray
+        }
+    }
+}
+
+.toaster {
+    margin-top: 20px;
+    font-weight: bold;
+}

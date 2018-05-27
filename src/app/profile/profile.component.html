@@ -1,0 +1,105 @@
+<div class="wrapper">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/fabio-mangione.jpg');">
+        <div class="filter"></div>
+    </div>
+    <div class="section profile-content">
+        <div class="container">
+            <div class="owner">
+                <div class="avatar">
+                    <img src="../assets/img/admin_image.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                </div>
+                <div class="name">
+                    <h4 class="title">Khachik Ghazaryan<br /></h4>
+                    <h6 class="description">Admin</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto text-center">
+                    <button class="btn btn-outline-default btn-round" (click)="openModal(content)"><i class="fa fa-cog"></i> Add new article</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="isToasterVisible">
+                <div class="col-md-10 ml-auto mr-auto text-center toaster">
+                    <ngb-alert type="success" [dismissible]="false">
+                        Article successfully added
+                    </ngb-alert>
+                </div>
+            </div>
+            <br/>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title text-center">Add new article</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef.close()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row body-container">
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="articleModel.title" placeholder="Article title">
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <textarea class="form-control" [(ngModel)]="articleModel.data" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-11 form-group">
+                <div class="input-group date">
+                    <input class="form-control" [(ngModel)]="articleModel.building_date" placeholder="Building date (yyyy-mm-dd)" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-default" id="dropdownBasic1" ngbDropdownToggle>{{selectCityTitle}}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <!-- <div class="dropdown-menu" *ngFor="let country of countryList" ngbDropdownMenu> -->
+                            <button class="dropdown-item select-city" *ngFor="let country of countryList" (click)="onCityClick(country)">{{country}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <input type="number" class="form-control" [(ngModel)]="articleModel.latitude" placeholder="Latitude">
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <input type="number" class="form-control" [(ngModel)]="articleModel.longitude" placeholder="Longitude">
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <input #wallpaperImage type="file" class="file-input" (change)="onWallpaperImageChange($event)" accept="image/*">
+                    <button class="btn btn-outline-default btn-sm" (click)="wallpaperImage.click()">Choose wallpaper image</button>
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <input #galleryImage type="file" class="file-input" (change)="onGalleryImageChange($event)" accept="image/*" multiple>
+                    <button class="btn btn-outline-default btn-sm" (click)="galleryImage.click()">Choose gallery images</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="left-side">
+            <button type="button" class="btn btn-danger btn-link" (click)="modalRef.close()">Cancel</button>
+        </div>
+        <div class="divider"></div>
+        <div class="right-side">
+            <button type="button" class="btn btn-default btn-link" (click)="onSubmit();" [disabled]="isCreateButtonDisabled">Create</button>
+        </div>
+    </div>
+</ng-template>
